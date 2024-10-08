@@ -1,0 +1,23 @@
+                                     # 08-10-24
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        def rever(s,st,end):
+            #s=s.split()
+            l,r=st,end
+            if s[l]==" ":
+                l+=1
+            if s[r]==" ":
+                r-=1
+            while l<=r:
+                s[r],s[l]=s[l],s[r]
+                l+=1
+                r-=1
+            return s   #''.join(s)
+        s1=s.split()                       #  ['the', 'sky', 'is', 'blue']
+        s1=rever(s1,0,len(s1)-1)           #  ['blue', 'is', 'sky', 'the']
+        return ' '.join(s1)
+
+"""
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+"""
