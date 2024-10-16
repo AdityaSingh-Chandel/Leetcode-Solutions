@@ -1,0 +1,66 @@
+                                  # 17-10-24
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        iMax=2**31-1
+        iMin=-2**31
+        sign,num=0,0
+        found=False
+
+        for x in s:
+            if x==" " and not found:
+                continue
+            elif x=="-" and not found and sign==0:
+                sign=-1
+            elif x=="+" and not found and sign==0:
+                sign=1
+            #elif x=="0" and not found and sign==0:
+            #    found=True
+            #    continue
+            
+            elif x.isdigit():
+                if sign==0:
+                    sign=1
+                found=True
+                dig=int(x)
+                if num > (iMax-dig)//10:
+                    return iMax if sign==1 else iMin
+                num=num*10+dig
+            else:
+                break
+        return sign*num
+
+            
+
+
+
+"""
+            # Wrong Output for "0-1"
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        iMax=2**31-1
+        iMin=-2**31
+
+        sig=0
+        num=0
+        for x in s:
+            if x==" ":
+                pass
+            elif (x=="-" or x=="+") and num==0:
+                sig=-1 if x=="-" else 1
+            elif x=="0" and num==0:
+                if sig==0:
+                    continue
+                
+            elif x.isdigit():
+                if sig==0:
+                    sig=1
+                dig=int(x)
+                if num > (iMax-dig)//10:
+                    return iMax if sig==1 else iMin
+                num=num*10+dig
+            else:
+                return num*sig
+                
+        return num*sig
+            
+"""
