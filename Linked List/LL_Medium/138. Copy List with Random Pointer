@@ -1,0 +1,52 @@
+                            # 20-10-24
+
+"""
+Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+Input: head = [[1,1],[2,1]]
+Output: [[1,1],[2,1]]
+"""
+
+                   # Solution Code
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if head==None:                # or head.next==None:
+            return None
+        curr=head
+        while curr:
+            next=curr.next
+            curr.next=Node(curr.val)
+            curr.next.next=next
+            curr=next
+        curr=head
+        while curr:
+            if curr.next:    # and curr.random:
+                if curr.random:
+                    curr.next.random=curr.random.next
+            curr=curr.next.next
+        h2=head.next
+        copy=head.next
+        curr=head
+        while curr:
+            if curr.next:
+                curr.next=curr.next.next
+            else:
+                curr.next=None
+            if copy.next: # and  copy.next:
+                copy.next=copy.next.next
+            #else:
+            #    copy.next=None
+            curr=curr.next
+            if copy:
+                copy=copy.next
+        return h2
