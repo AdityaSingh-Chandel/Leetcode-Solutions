@@ -1,0 +1,41 @@
+                        # 28-10-24
+"""   # CORRECT 
+class Solution:
+    def longestSquareStreak(self, nums: List[int]) -> int:
+        nums.sort()
+
+        s=set(nums)
+        res=-1
+        for i in range(len(nums)):
+            num=nums[i]
+            stk=-1
+            while num*num in s:
+                #print("num:",num,end="  ")
+                
+                if stk==-1:
+                    stk=2
+                else:
+                    stk+=1
+                res=max(res,stk)
+                #print("res:",res)
+                num=num*num
+
+        return res
+""" 
+#  same approach - Little more optimized
+class Solution:
+    def longestSquareStreak(self, nums: List[int]) -> int:
+        nums.sort()
+        num_set = set(nums)
+        max_length = -1
+
+        for num in nums:
+            current_length = 1
+            while (num * num) in num_set:
+                current_length += 1
+                num *= num
+            if current_length > 1:
+                max_length = max(max_length, current_length)
+
+        return max_length if max_length > 1 else -1
+
