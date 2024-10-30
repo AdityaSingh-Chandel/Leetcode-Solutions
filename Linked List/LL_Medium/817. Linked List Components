@@ -1,0 +1,33 @@
+                            # 17-07-24
+"""
+Problem: You are given the head of a linked list containing unique integer values and an integer array nums 
+that is a subset of the linked list values.
+Return the number of connected components in nums where two values are connected if they appear consecutively in the linked list.
+EXM:
+Input: head = [0,1,2,3], nums = [0,1,3]
+Output: 2
+Explanation: 0 and 1 are connected, so [0, 1] and [3] are the two connected components.
+"""
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def numComponents(self, head: Optional[ListNode], nums: List[int]) -> int:
+        s=set(nums)
+        curr=head
+        # flag----- to check if component is connected or not
+        conn_comp=False
+        c=0
+
+        while curr:
+            if curr.val in s:
+                if not conn_comp:
+                    c+=1
+                    conn_comp=True
+            else:
+                conn_comp=False
+            curr=curr.next
+        return c
