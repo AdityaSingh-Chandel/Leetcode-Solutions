@@ -1,0 +1,15 @@
+                      # 05-11-24
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x<0:
+            return False
+        n=0
+        num=x    # as we are changing "x" -- so for comaprison 
+        while x>0:
+            d=x%10
+            x//=10
+            n=n*10+d
+        #print(n)
+        return num==n
+
+        
