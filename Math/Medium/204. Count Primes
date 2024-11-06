@@ -1,0 +1,16 @@
+                  # 06-11-24
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n<=2:
+            return 0
+        isPrime=[True]*(n+1)
+        i,c=2,0
+        while i < n:                # Strictly less than --So not =
+            if isPrime[i]:
+                c+=1                   # Count - to store count of primes
+                for j in range(i*i,n+1,i):
+                    isPrime[j]=False
+            i+=1
+        return c
+            
+        
