@@ -1,0 +1,88 @@
+                      # 08-11-24
+""" Approach:
+    [  ........... mxl1  ,  mnr1,.......]
+    [..............mxl2  ,  mnr2,........]
+
+    <------smaller-----> | <---larger---->
+"""
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        n1, n2 = len(nums1), len(nums2)
+
+        # this approach needs nums2 to be greater so swapping if not
+        if n1 > n2:
+            nums1, nums2, n1, n2 = nums2, nums1, n2, n1
+        
+        b1, e1 = 0, n1
+        
+        while b1 <= e1:
+            i1 = (b1 + e1) // 2
+            i2 = (n1 + n2 + 1) // 2 - i1
+
+            # infite are important --otherwise -- index out of range
+            mnr1 = float("inf") if i1 == n1 else nums1[i1]
+            mxl1 = float("-inf") if i1 == 0 else nums1[i1 - 1]
+
+            mnr2 = float("inf") if i2 == n2 else nums2[i2]
+            mxl2 = float("-inf") if i2 == 0 else nums2[i2 - 1]
+
+            if mxl1 <= mnr2 and mxl2 <= mnr1:
+                if (n1 + n2) % 2 == 0:   # if even 
+                    return (max(mxl1, mxl2) + min(mnr1, mnr2)) / 2
+                else:
+                    return max(mxl1, mxl2)
+            elif mnr1 < mxl2:
+                b1 = i1 + 1
+            else:
+                e1 = i1 - 1
+
+
+        """ # didn't work
+        n1,n2=len(nums1),len(nums2)
+        b1,e1=0,n1
+
+        while b1<=e1:
+            i1=(b1+e1)//2
+            i2=(n1+n2+1)//2 -i1
+
+            mnr1=foat("inf") if i1==n1 else nums1[i1]
+            mxl1=float("-inf") if i2==0 else nums1[i2-1]
+
+            mxl2=nums1[i2-1]
+            mnr2=nums2[i2]
+
+            if mxl1<=mnr2 and mxl2<=mnr1:
+                if (n1+n2)%2==0:
+                    return ( max(mxl1,mxl1) + min( mnr1,mnr2))/2
+                else:
+                    return max(mxl1,mxl2)
+            elif mnr1 < mxl2:
+                #b1=i1+1
+                e1=i1-1
+            else:
+                #e1=i1-1
+                b1=i1+1
+        
+        """
+        """   # didn't work
+        n1,n2=len(nums1),len(nums2)
+        even = False
+        if (n1+n2)%2==0:
+            even=True
+        m=(n1+n2)//2
+        id1,id2=0,0
+        while id1<n1-1 and id2<n2-1 and id1+id2!=m:
+            if nums1[id1] > nums2[id2]:
+                id2+=1
+            else:
+                id1+=1
+            if not even:
+                if id1+id2==m:
+                    return max(nums1[id1],nums2[id2])
+            else:
+                if id1+id2 == m-1:
+                    s=max(nums1[id1],nums2[id2])
+                if id1+id2 == m:
+                    s+=max(nums1[id1],nums2[id2])
+                    return s/2
+        """
