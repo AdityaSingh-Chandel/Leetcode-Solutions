@@ -1,0 +1,64 @@
+                            # 09-11-24
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        stack = []
+        
+        for asteroid in asteroids:
+            # Process collisions
+            while stack and asteroid < 0 < stack[-1]:
+                # Compare the sizes for collision outcomes
+                if stack[-1] < -asteroid:
+                    stack.pop()
+                    continue
+                elif stack[-1] == -asteroid:
+                    stack.pop()
+                break
+            else:
+                # If no collision, push the asteroid to stack
+                stack.append(asteroid)
+        
+        return stack
+
+"""
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        if len(asteroids)==0:
+            return []
+    
+        st=[]
+        for s in asteroids:
+            if st and ( s<0<st[-1] ):
+                if st[-1] < -s:
+                    st.pop()
+                    if (st[-1]<0 and s<0) or (st[-1]>0 and s>0):
+                        st.append(s)
+
+                    continue
+                elif st[-1]== -s:
+                    st.pop()
+                #break
+                
+            else:
+                st.append(s)
+        return st
+        
+"""
+
+"""
+        
+        st=[asteroids[0]]
+        i=1
+        while i<len(asteroids):
+            if (asteroids[i]<0 and st.pop()>0) or (asteroids>0 and st.pop()<0):
+                p=st.pop()
+                if abs(p) > abs(asteroids[i]):
+                    n=p
+                else:
+                    n=asteroids[i]
+            else:
+                i+=1
+        out=[]
+        for i in st:
+            out.append(i)
+        return out[::-1]
+ """
