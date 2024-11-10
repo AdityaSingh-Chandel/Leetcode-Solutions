@@ -1,0 +1,68 @@
+                               # 10-11-24
+"""                 Reservoir Sampling Algorithm
+An algorithm that allows us to select a random element from a stream (or list) of unknown size with UNIFORM Probability. In this case, our stream is the linked list.
+"""
+"""
+ #                 Beats 16%  Time
+ #                 Beats 80%  Space
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    import random
+    def __init__(self, head: Optional[ListNode]):
+        self.head=head
+        
+
+    def getRandom(self) -> int:
+        res=self.head.val
+        curr=self.head
+        idx=1
+
+        while curr:                              # reservoir Sampling Algo
+            if random.randint(1,idx)==1:    # Only 1 -- if any diff no. is choosen 
+                res=curr.val        # then idx<(that no.)-No Prob of being choosen
+            curr=curr.next
+            idx+=1
+        return res
+    
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(head)
+# param_1 = obj.getRandom()
+
+"""
+
+
+    # Approach 2  -- Better time - O(N) to O(1)     Beats ~ 92%
+    #            But poor Space - O(1) to O(N)      Beats ~ 32%
+
+import random
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+
+    def __init__(self, head: ListNode):
+        # Initialize an array to store the linked list values
+        self.values = []
+        current = head
+        # Traverse the list once to populate the array
+        while current:
+            self.values.append(current.val)
+            current = current.next
+
+    def getRandom(self) -> int:
+        # Randomly select a value from the array
+        return random.choice(self.values)
+
+# Example usage:
+# head = ListNode(1, ListNode(2, ListNode(3)))
+# solution = Solution(head)
+# print(solution.getRandom()) # Each call should return 1, 2, or 3 randomly
