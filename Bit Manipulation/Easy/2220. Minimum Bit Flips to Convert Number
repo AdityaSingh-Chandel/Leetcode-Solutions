@@ -1,0 +1,11 @@
+                     # 02-12-24
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        n  = max(len(bin(start)),len(bin(goal)))-2
+        c=0
+        for i in range(n):
+            if (start & 1) != (goal & 1):      # if last bit is not same 
+                c+=1
+            start=start>>1                      # removing last bit
+            goal=goal>>1                        # removing last bit
+        return c  
