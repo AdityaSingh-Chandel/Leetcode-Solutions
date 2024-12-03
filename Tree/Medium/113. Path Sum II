@@ -1,0 +1,34 @@
+                # 03-12-24
+# Definition for a binary tree root.
+# class Treeroot:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        def findPaths(root,curr_path, all_paths):
+            if not root:
+                return 
+            curr_path.append(root.val)
+            if not root.left and not root.right:
+                if curr_path != []:
+                    all_paths.append(list(curr_path))
+            findPaths(root.left, curr_path, all_paths)
+            findPaths(root.right, curr_path , all_paths)
+
+            if curr_path != []:
+                curr_path.pop()
+
+        all_paths=[]
+        findPaths(root,[],all_paths)
+        #print(all_paths)
+
+        out=[]
+        # if targetSum==0:
+        #     return out
+        for arr in all_paths:
+            if sum(arr)==targetSum and arr!=[]:
+                
+                out.append(arr)
+        return out
