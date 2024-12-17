@@ -1,0 +1,25 @@
+                          # 17-12-24
+"""
+You are given a 0-indexed integer array piles, where piles[i] represents the number of stones in the ith pile, and an integer k. You should apply the following operation exactly k times:
+
+Choose any piles[i] and remove floor(piles[i] / 2) stones from it.
+"""
+import heapq
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        # for i in range(k):
+        #     piles.sort(reverse=True)
+        #     piles[0]-= piles[0]//2
+        # return sum(piles)
+
+        mx_heap = [-pile for pile in piles]
+        heapq.heapify(mx_heap)
+
+        for i in range(k):
+            largest = - heapq.heappop(mx_heap)
+            reduced = largest - largest//2
+            heapq.heappush(mx_heap,-reduced)
+        
+        return -sum(mx_heap)
+
+        
