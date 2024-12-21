@@ -1,0 +1,19 @@
+                      # 21-12-24
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def backtrack(s,curr_sum,curr_comb):
+            if curr_sum==target:
+                res.append(list(curr_comb))
+                return
+            elif curr_sum > target:
+                # curr_comb=[]
+                return
+            for i in range(s,len(candidates)):
+                curr_comb.append(candidates[i])
+                backtrack(i,curr_sum+candidates[i],curr_comb)       # i , not (i+1)
+                curr_comb.pop()                                     # backtrack
+        res=[]
+        backtrack(0,0,[])
+        return res
+
+
