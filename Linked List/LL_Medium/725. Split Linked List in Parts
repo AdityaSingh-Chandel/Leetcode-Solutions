@@ -1,0 +1,80 @@
+                            # 29-12-24
+class Solution:
+    def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
+        # Step 1: Count the total number of nodes in the list
+        n = 0
+        curr = head
+        while curr:
+            n += 1
+            curr = curr.next
+        
+        # Step 2: Calculate the size of each part
+        part_size = n // k
+        extra_nodes = n % k  # Extra nodes to distribute
+        
+        # Step 3: Create the result parts
+        result = []
+        curr = head
+        for i in range(k):
+            part_head = curr  # Start of the current part
+            prev = None
+            # Add the appropriate number of nodes to this part
+            for j in range(part_size + (1 if i < extra_nodes else 0)):
+                prev = curr
+                if curr:
+                    curr = curr.next
+            # Disconnect the current part from the rest of the list
+            if prev:
+                prev.next = None
+            result.append(part_head)
+        
+        return result
+
+
+# # Definition for singly-linked list.
+# # class ListNode:
+# #     def __init__(self, val=0, next=None):
+# #         self.val = val
+# #         self.next = next
+# class Solution:
+#     def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
+#         n=0
+#         curr=head
+#         while curr:
+#             n+=1
+#             curr=curr.next
+#         if k==0:
+#             return head
+#         if n==0:
+#             return [[]*k]
+#         if k>n:
+#             curr=head
+#             out=[]
+#             while curr:
+#                 out.append([curr.val])
+#             for i in range(k-n):
+#                 out.append([])
+#             return out
+#         p=n//k
+#         if p*k != n:
+#             carry = n % p
+#         out=[]
+#         curr=head
+#         while curr:
+#             if carry:
+#                 if carry>=1:
+#                     car=1
+#                     carry-=1
+#                 else:
+#                     car=0
+#             # out.append([])
+#             l=[]
+#             for i in range(p+car):
+#                 l.apeend(curr.val)
+#                 curr=curr.next
+#             out.append(l)
+#             # carry-=1
+
+#         return out
+
+        
