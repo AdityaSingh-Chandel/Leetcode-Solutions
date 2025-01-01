@@ -1,0 +1,44 @@
+                      01 - 01 - 25
+                    # 1st Q of 2025
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack=[]
+
+        self.helper_pushLeft(root)
+              
+              # stack contains smallest element at its right(top)
+    def helper_pushLeft(self,node):
+        while node:
+            self.stack.append(node)
+            node=node.left
+
+    def next(self) -> int:
+        top_node=self.stack.pop()
+        if top_node.right:
+            self.helper_pushLeft(top_node.right)
+        
+        return top_node.val
+
+    def hasNext(self) -> bool:
+        return len(self.stack)>0
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
+
+
+"""
+Complexity:
+    Time : O(1)
+    Space: O(n)   --- Worst case
+           O(logn) --- best case
+"""
