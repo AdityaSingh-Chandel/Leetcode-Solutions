@@ -1,0 +1,39 @@
+                         # 12-01-24
+from typing import List
+
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        n = len(digits)
+        
+        # Traverse the digits array from right to left
+        for i in range(n - 1, -1, -1):
+            if digits[i] < 9:
+                digits[i] += 1
+                return digits
+            # Set current digit to 0 if it is 9
+            digits[i] = 0
+        
+        # If all digits are 9, prepend 1 at the beginning
+        return [1] + digits
+
+
+# class Solution:
+#     def plusOne(self, digits: List[int]) -> List[int]:
+#         arr=digits[::-1]
+#         arr[0]+=1
+#         if arr[0]>9:
+#             quo = arr[0] // 10
+#             arr[0]= arr[0]%10
+
+#             for i in range(1,len(arr)):
+#                 arr[i]+=quo
+#                 if arr[i]>9:
+#                     carry = arr[i]%10
+#                     quo = arr[i] //10
+#                     arr[i]=carry
+#                 else:
+#                     quo=0
+#                     break
+#             if quo:
+#                 arr.append(quo)
+#         return arr[::-1]
