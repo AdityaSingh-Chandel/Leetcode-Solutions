@@ -1,4 +1,5 @@
              # 16-01-25
+        # Complexity: Time & Space : O( numRows ^2)
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         out=[]
