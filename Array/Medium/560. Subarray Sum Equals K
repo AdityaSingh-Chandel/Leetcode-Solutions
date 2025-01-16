@@ -1,0 +1,57 @@
+                     # 16-01-25
+
+                 # Complexity: T: O(n) ; S: O(n)
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        
+        count = 0
+        current_sum = 0
+        sum_freq = {0: 1}  # Initialize with sum 0 having frequency 1
+        
+        for num in nums:
+            current_sum += num
+            
+            # Check if (current_sum - k) is in the map
+            if (current_sum - k) in sum_freq:
+                count += sum_freq[current_sum - k]
+            
+            # Update the frequency of the current sum in the map
+            if current_sum in sum_freq:
+                sum_freq[current_sum] += 1
+            else:
+                sum_freq[current_sum] = 1
+        
+        return count
+
+                # same approach - but did not work
+                # Diff: if curr==k (not required)
+        # curr,c=0,0
+        # d={0:1}
+        # for x in nums:
+        #     curr+=x
+        #     if curr==k:
+        #         c+=1
+        #     if curr-k in d:
+        #         c+=d[curr-k]
+        #     if curr in d:
+        #         d[curr]+=1
+        #     else:
+        #         d[curr]=1
+        # return c
+
+
+
+            # did not work
+        # s=set()
+        # for i in range(len(nums)):
+        #     curr+=nums[i]
+        #     if curr==k:
+        #         c+=1
+        #     if curr-k in :
+        #         c+=1
+        #     s.add(curr)
+        #     # d[curr]=i
+        # return c
+
+
+        
