@@ -1,0 +1,45 @@
+            # 14-01-25
+
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+
+            # T:O(N) S:O(N)
+        n=len(nums)
+        pos,neg=0,1
+        out=[0]*n
+        for x in nums:
+            if x > 0:
+                out[pos]=x
+                pos+=2
+            else:
+                out[neg]=x
+                neg+=2
+        return out
+
+
+                # T:O(N^2) S:O(1)  
+                # but failed to pass all Test cases
+        # l=len(nums)-1
+        # p,n=0,-1
+        # while n<l and p<l:
+            
+        #     if nums[p]>0:
+        #         n=p+1
+        #     else:
+        #         while nums[p]<0 and p<l:
+        #             p+=1
+        #         id=n+1
+        #         nums[p],nums[id]=nums[id],nums[p]
+        #         p=n+1
+        #         n=p+1
+        #     if nums[n]<0:
+        #         p=n+1
+        #     else:
+        #         while nums[n]>0 and n<l:
+        #             n+=1
+        #         id=p+1
+        #         nums[id],nums[n]=nums[n],nums[id]
+        #         n=p+1
+        #         p=n+1
+        # return nums
+        
