@@ -1,0 +1,20 @@
+                # 17-01-25
+          # O(logn)
+          #  O(1)
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        l,h=0,len(nums)-1
+        if nums[l]> target:
+            return 0
+        elif nums[h]<target:
+            return h+1
+        while l<=h:
+            m=(l+h)//2
+            if nums[m]==target or (nums[m-1]<target and nums[m]>target):
+                return m
+            elif nums[m] > target:
+                h=m-1
+            else:
+                l=m+1
+        return len(nums)
+            
