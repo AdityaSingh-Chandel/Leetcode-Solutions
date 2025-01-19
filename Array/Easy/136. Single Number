@@ -1,0 +1,17 @@
+                # 15-01-25
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        s=set()
+        for x in nums:
+            if x in s:
+                s.remove(x)
+            else:
+                s.add(x)
+        return s.pop()
+
+            # I think - below sol worked
+        # xr=0
+        # for i in nums:
+        #     xr=xr^i
+        # return xr
+        
