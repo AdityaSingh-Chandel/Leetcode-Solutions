@@ -1,0 +1,27 @@
+             # 19-01-25
+  # My 
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        n=len(nums)
+        l,h=0,n-1
+        while l<=h:
+            m=(l+h)//2
+            if ((m==0 or nums[m]>nums[m-1]) or m==l) and (m==n-1 or nums[m]>nums[m+1]):
+                return m
+            if nums[m] < nums[m+1]:
+                l=m+1
+            else:
+                h=m-1
+
+  # ChatGPT
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        n = len(nums)
+        l, h = 0, n - 1
+        while l < h:
+            m = (l + h) // 2
+            if nums[m] > nums[m + 1]:  # Check if mid element is greater than its next element
+                h = m  # Move to the left half, including mid, since it could be the peak
+            else:
+                l = m + 1  # Move to the right half, excluding mid, as the peak must be there
+        return l  # l will eventually point to the peak element
