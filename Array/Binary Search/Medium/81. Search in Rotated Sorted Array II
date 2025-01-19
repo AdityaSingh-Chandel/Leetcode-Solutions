@@ -1,0 +1,29 @@
+              # 18-01-25
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:
+        n=len(nums)
+        l,h=0,n-1
+        while l<=h:
+            m=(l+h)//2
+            if nums[m]==target:
+                return True
+
+            # Skip duplicates on the left
+            while l < m and nums[l] == nums[m]:
+                l += 1
+            
+            # Skip duplicates on the right
+            while h > m and nums[h] == nums[m]:
+                h -= 1
+
+            if nums[l] <= nums[m] and l<n-1:        # "=" still important
+                if nums[l] <= target <= nums[m]:
+                    h=m-1
+                else:
+                    l=m+1
+            else:
+                if nums[m] <= target <= nums[h]:
+                    l=m+1
+                else:
+                    h=m-1
+        return False
