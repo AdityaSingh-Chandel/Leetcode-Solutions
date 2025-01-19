@@ -1,0 +1,16 @@
+               # 19-01-25
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+              # T: O(logn) ; S: O(1)
+        n=len(nums)
+        l,h=0,n-1
+        while l<=h:
+            m=(l+h)//2
+            if (m == 0 or nums[m] < nums[m-1]) and (m == n-1 or nums[m] < nums[m+1]):
+                return nums[m]
+
+            if nums[m] > nums[h]:
+                l=m+1
+            else:
+                h=m-1
+        
