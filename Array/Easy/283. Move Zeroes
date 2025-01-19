@@ -1,0 +1,27 @@
+          # 15-01-25
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+           # T:(n)  S:O(1))
+        n=len(nums)
+        j=0
+        for i in range(n):
+            if nums[i]!=0:
+                nums[j],nums[i]=nums[i],nums[j]
+                j+=1
+        return nums
+
+# 2nd Solution:            # Worked 
+            # T:O(n)  S:O(n)
+        # out=[0]*n
+        # i=0
+        # for x in nums:
+        #     if x!=0:
+        #         out[i]=x
+        #         i+=1
+        # for i in range(n):
+        #     nums[i]=out[i]
+            
+                
