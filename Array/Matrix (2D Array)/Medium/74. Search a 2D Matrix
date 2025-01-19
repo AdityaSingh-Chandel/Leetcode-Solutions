@@ -1,0 +1,37 @@
+                   # 19-01-25      
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m,n=len(matrix),len(matrix[0])
+        def BS_1d(arr,x,n):
+            lo,hi=0,n-1
+            while lo<=hi:
+                md=(lo+hi)//2
+                if arr[md]==x:
+                    return True
+                elif arr[md] < x:
+                    lo=md+1
+                else:
+                    hi=md-1
+            return False
+        low,hi=0,m-1  
+        while low<=hi:
+            mid=(low+hi)//2
+            if matrix[mid][0] <= target <= matrix[mid][n-1]:
+                # khojo
+                return BS_1d(matrix[mid],target,n)
+            elif target < matrix[mid][0]:
+                hi=mid-1
+            else:
+                low=mid+1
+        return False
+
+"""Time complexity:
+O( log (m*n)) or O( log m + log n)
+
+where O( log m) for rows ( main function)
+and , O(log n) for columns ( BS_1d # the nested function call)
+
+Space complexity: O(1)
+"""
+    
+        
