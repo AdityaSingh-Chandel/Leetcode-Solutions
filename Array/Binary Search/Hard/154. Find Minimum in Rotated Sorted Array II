@@ -1,0 +1,39 @@
+              # 19-01-25
+        # worked for -- 156/193 test cases
+# class Solution:
+#     def findMin(self, nums: List[int]) -> int:
+#         n=len(nums)
+#         l,h=0,n-1
+#         while l<=h:
+#             m=(l+h)//2
+#             if (m==0 or nums[m]<=nums[m-1]) and (m==n-1 or nums[m]<=nums[m+1]):
+#                 return nums[m]
+#             while l<=m and nums[l]==nums[m]:
+#                 l+=1
+#             while h>m and nums[m]==nums[h]:
+#                 h-=1
+#             if nums[m] > nums[h]:
+#                 l=m+1
+#             else:
+#                 h=m-1
+
+         # O(logn)  Note: in the worst case (rarely) can go up to O(n) also
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        n = len(nums)
+        l, h = 0, n - 1
+        while l < h:
+            m = (l + h) // 2
+
+            # Pahle-- if right half -unsorted
+            if nums[m] > nums[h]:   
+                l = m + 1
+            # Then -- if right half -sorted 
+            elif nums[m] < nums[h]:    
+                h = m           # h=m-1 nhi kiya , qki..
+            else:  # nums[m] == nums[h]
+                h -= 1  # Reduce h to skip the duplicate
+        return nums[l]
+
+
+        
