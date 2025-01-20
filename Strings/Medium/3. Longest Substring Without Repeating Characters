@@ -1,0 +1,20 @@
+          # 20-01-25
+   #  O(n) ; O(1)
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s)<=1:
+            return len(s)
+        d={s[0]:0}
+        mx=1
+        
+        st,e=0,1
+        while e < len(s):
+            if s[e] not in d or (d[s[e]] < st ):
+                d[s[e]]=e
+                mx=max(mx,e-st+1)
+            else:
+                st=d[s[e]]+1
+                d[s[e]]=e
+            e+=1
+        return mx
+            
