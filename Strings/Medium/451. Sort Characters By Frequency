@@ -1,0 +1,16 @@
+      # 19-10-24
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        d={}
+        for x in s:
+            if x in d:
+                d[x]+=1
+            else:
+                d[x]=1
+        d=sorted(d.items(),key=lambda x: x[1])
+        
+        s=""
+        for i in range(len(d)-1,-1,-1):
+            s+=d[i][0]*d[i][1]
+        return s
+        
