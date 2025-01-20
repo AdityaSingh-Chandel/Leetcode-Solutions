@@ -1,0 +1,45 @@
+                 # 20-01-25
+            # O(n)
+            # O(n) : Space
+            # O(1) : Aux Space
+           # correct - beats 42%
+# class Solution:
+#     def compressedString(self, word: str) -> str:
+#         r,comp=0,""
+#         while r < len(word):
+#             char = word[r]
+#             c=0
+
+#             while r<len(word) and word[r]==char:
+#                 c+=1
+#                 r+=1
+            
+#             while c>9:
+#                 comp+="9"
+#                 c-=9
+#                 comp+=char
+#             comp+=str(c)
+#             c=0
+#             comp+=char
+            
+#         return comp
+
+class Solution:
+    def compressedString(self, word: str) -> str:
+        comp = []
+        i = 0
+        
+        while i < len(word):
+            char = word[i]
+            count = 0
+            
+            while i < len(word) and word[i] == char and count < 9:
+                count += 1
+                i += 1
+            
+            comp.append(f"{count}{char}")
+        
+        return ''.join(comp)
+
+
+
