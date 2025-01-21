@@ -1,0 +1,60 @@
+               # 21-01-25
+           # T: O(n * log( max(piles)  ; S: O(1)
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        # The minimum speed should be at least 1 (not piles[0]) and maximum can be max(piles)
+        l, r = 1, max(piles)
+        ans = float('inf')
+        
+        # Binary search for the minimum speed
+        while l <= r:
+            k = (l + r) // 2
+            hours_needed = 0
+            
+            # Calculate total hours needed for the current speed `k`
+            for pile in piles:
+                hours_needed += -(-pile // k)  # Ceiling division
+                
+            # If the hours needed is within the limit
+            if hours_needed <= h:
+                ans = min(ans, k)
+                r = k - 1  # Try for a smaller speed
+            else:
+                l = k + 1  # Increase the speed to reduce hours
+        
+        return ans
+
+
+             # Completely my appraoch(Correct) and Solution [~ 40 min] -- but giving only NULL as O/P
+        # piles.sort()
+        # l,h=piles[0],piles[-1]
+        # ans=float('inf')
+        # while l<= h:
+        #     h_=h
+        #     k = (l+h)//2
+            
+        #     # operation
+        #     temp=piles
+        #     while h_< 0:
+        #         c=0
+        #         for i in reversed(range(len(temp))):
+        #             if temp[i]<=0:
+        #                 break
+        #             else:
+        #                 temp[i]-=k
+        #                 c+=1
+        #         h_-=c
+            
+        #     if h_==0 and temp[-1]<=0:
+        #         ans=min(ans,k)
+            
+        #     elif (temp[-1]>=0):
+        #         l=k+1
+        #     else:
+        #         ans=min(ans,k)
+        #         h=k-1
+        # return ans
+
+            
+
+            
