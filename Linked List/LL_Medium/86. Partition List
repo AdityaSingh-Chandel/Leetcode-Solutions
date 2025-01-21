@@ -1,0 +1,60 @@
+                      # 21-01-25
+         # O(n) 
+         # O(1)
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        if not head:
+            return head
+
+        h1=ListNode(0)
+        h2=ListNode(0)
+        c1=h1
+        c2=h2
+
+        curr=head
+        while curr:
+            if curr.val < x:
+                c1.next=curr
+                c1=c1.next
+            else:
+                c2.next=curr
+                c2=c2.next
+            curr=curr.next
+
+        c2.next = None       # IMPORTANT -- nhi kiya to -> Memory exceded
+        c1.next= h2.next    # 1st node -> dummy , so leave
+
+        return h1.next
+
+
+
+# my 1st approach--> did not work [See]
+        # dum=ListNode(-1)
+        # dum_h=dum
+        # if not head:
+        #     return head
+        # curr=head
+        
+        # #prev.next=head
+        # while curr:
+        #     if curr.val< x:
+        #         dum_h.next=curr
+        #         # delete the node with only pointer
+        #         curr.val=curr.next.val
+        #         curr.next=curr.next.next
+        #     else:
+        #         curr=curr.next
+        #     dum_h=dum_h.next
+
+        # curr=dum.next
+        # while curr.next:
+        #     curr=curr.next
+        # curr.next=head
+
+        # return dum.next
+            
