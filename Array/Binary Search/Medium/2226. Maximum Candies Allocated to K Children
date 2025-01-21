@@ -1,0 +1,38 @@
+                  # 21-01-25
+              # O( n * log(max(candies)))
+              # O(1)
+class Solution:
+    def maximumCandies(self, candies: List[int], k: int) -> int:
+        if sum(candies)<k:
+            return 0
+        
+        res=0
+        l,h=1,max(candies)
+
+        while l <= h:
+            m=(l+h)//2
+            
+            # max_child --> max no. of children that can be served "m" candies
+            max_child= sum( candy//m for candy in candies)  # greedy check
+
+            if max_child >= k:
+                res=max(res,m)
+                l=m+1
+            else:
+                h=m-1
+        return res
+#     def maximumCandies(self, candies: List[int], k: int) -> int:
+#         if sum(candies)<k:
+#             return 0
+#         candies.sort()
+#         res=0
+#         l,h=1,candies[0]
+#         while l<=h:
+#             m=(l+h)//2
+
+#             if m >= candies[0]:
+#                 res=max(res,m)
+#                 l=m+1
+#             else:
+#                 h=m-1
+#         return res
