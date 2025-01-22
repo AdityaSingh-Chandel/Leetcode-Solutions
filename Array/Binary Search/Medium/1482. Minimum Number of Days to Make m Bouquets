@@ -1,0 +1,30 @@
+                  # 22-01-25
+           # O(n * log(max(bloomDay)))
+           # O(1)
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        if m*k > len(bloomDay):
+            return -1
+
+        l,h=1,max(bloomDay)
+        res=float('inf')         # GPT --same ; res = -1
+        while l<=h:
+            mid=(l+h)//2
+            bq_made=0         # count of Total bouquets that can be made
+            f=0               # count of adjacent flowers
+            for day in bloomDay:
+                if day <= mid:
+                    f+=1
+                    if f==k:
+                        bq_made+=1
+                        f=0
+                else:
+                    f=0
+
+            if bq_made >= m:
+                res = min(res,mid)        # GPT : res = mid 
+                h=mid-1
+            else:
+                l=mid+1
+        return res
+                
