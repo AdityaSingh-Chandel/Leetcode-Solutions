@@ -1,0 +1,65 @@
+                 # 22-01-25
+                    # O(n) ; O(1)
+# Revise : nhi hua tha mujhse 
+# dummy.next har level ka leftmost node de rha h 
+    #  --> qki hum curr ke left CHILD ko phle dekh rhe h, agar h to 
+    #      use dummy ke next se point kar de rhe   
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
+        curr_leftmost=root
+        while curr_leftmost:
+            curr=curr_leftmost
+            dummy = Node(0)
+            prev=dummy
+            
+            while curr:
+                if curr.left:
+                    prev.next=curr.left
+                    prev=prev.next
+                if curr.right:
+                    prev.next=curr.right
+                    prev=prev.next
+                curr=curr.next
+            
+            curr_leftmost = dummy.next
+        return root
+
+
+
+                   # mera approach galat h -- very Inefficient
+        # curr_lev=root
+        # while curr_lev.left or curr_lev.right:
+        #     curr=curr_lev
+        #     while curr:
+        #         if curr.left and curr.right:
+        #             curr.left.next=curr.right
+        #         if curr.next and curr.right:
+        #             if curr.next.left:
+        #                 curr.right.next=curr.next.left
+                        
+        #             else:
+        #                 curr.right.next=curr.next.right
+        #         elif curr.next and curr.right==None:
+
+
+        #         curr=curr.next
+            
+        #     if curr_lev.left:
+        #         curr_lev=curr_lev.left
+        #     else:
+        #         curr_lev=curr_lev.right
+        # return root
+
+        
