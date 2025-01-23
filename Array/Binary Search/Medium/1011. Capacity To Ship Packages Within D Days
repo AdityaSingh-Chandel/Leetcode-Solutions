@@ -1,0 +1,22 @@
+                   # 23-01-25
+            # O(n * log(sum(weights) - max(weights)))
+            # O(1)
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        l,h=max(weights),sum(weights)     # initially -> l = 1 (X)
+        while l<=h:
+            m = (l+h)//2
+            t_days=1                    # t_days=0  (X)
+            w=0
+            for wei in weights:
+                if w+wei <= m:
+                    w+=wei
+                else:
+                    t_days+=1
+                    w=wei 
+            if t_days <= days:
+                ans=m
+                h=m-1
+            else:
+                l=m+1
+        return ans
