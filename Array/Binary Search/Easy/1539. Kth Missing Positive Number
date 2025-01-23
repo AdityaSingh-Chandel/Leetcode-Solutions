@@ -1,0 +1,35 @@
+                   # 23-01-25
+            # O( logn)
+            # O(1)
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        l, h = 0, len(arr) - 1
+        while l <= h:
+            m = (l + h) // 2
+            t_miss = arr[m] - (m + 1)  # Missing numbers up to index m
+
+            if t_miss < k:
+                # Shift right if missing count is less than k
+                l = m + 1
+            else:
+                # Shift left
+                h = m - 1
+        
+        # Return the kth missing number
+        return l + k
+
+        # my approach did not work  -- only diff is "return" statement
+# class Solution:
+#     def findKthPositive(self, arr: List[int], k: int) -> int:
+#         l,h=0, len(arr)-1
+#         while l<=h:
+#             m=(l+h)//2
+#             t_miss=arr[m] - (m+1)
+
+#             if t_miss==0 or t_miss<k :
+#                 # shift right
+#                 l=m+1
+#             else:
+#                 # return  arr[h]-t_miss +k-1
+#                 h=m-1 
+#         return arr[h]-t_miss+k-1 if t_miss!=0 else arr[h]+k
