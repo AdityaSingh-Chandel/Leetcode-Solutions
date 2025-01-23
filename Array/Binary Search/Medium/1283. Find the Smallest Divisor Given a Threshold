@@ -1,0 +1,21 @@
+                 # 23-01-25
+             # O(n* log(max(nums)))
+             # O(1)
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        l,h=1,max(nums)
+        res=float('inf')
+        while l<=h:
+            d =(l+h)//2
+            
+            # ceil
+            s_= sum( -(-num//d) for num in nums)
+
+            if s_ <= threshold:
+                #possible
+                res=d
+                h=d-1
+            else:
+                l=d+1
+        return res
+
