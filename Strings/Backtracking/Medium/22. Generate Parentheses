@@ -1,0 +1,46 @@
+  # 25-01-25
+                     # O( 4^n / sqrt(n)) :-> by Catalan Number
+                     # O(n)   :-> due to Recursive stack
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if n==0:
+            return []
+        if n==1:
+            return ["()"]
+        
+        def backtrack(c1,c2,comb):
+            if c1==n and c2==n:
+                res.append(comb)
+                return 
+            if c1<n:
+                backtrack(c1+1,c2,comb+"(")
+
+            # if c2<n: -> ")))(((" ye bhi valid aa gya 
+            # c2<c1  -->> So there should always be a c1 or "(" for a ")" 
+
+            if c2<c1:
+                backtrack(c1,c2+1,comb+")")
+            
+        
+        res = []
+        backtrack(0, 0, "")
+        return res
+                     
+                     # my : could not
+        # def backtrack(c1,c2,comb):
+        #     if c1==n and c2==n:
+        #         res.append(comb)
+        #         return
+        #     if c1>n or c2>n:
+        #         return 
+            
+        #     for _ in range(n):
+        #         backtrack(c1+1,c2,comb+"(")
+        #         comb=comb[:-1]  # pop()
+        #         backtrack(c1,c2+1,comb+")")
+        #         comb=comb[:-1]
+        # res=[]
+        # backtrack(0,0,"")
+        # return res
+
+        
