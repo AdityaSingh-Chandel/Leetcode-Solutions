@@ -1,0 +1,70 @@
+                         # 25-01-25
+            # only 5%
+            # Not optimized - Better to use string than list in dict
+# class Solution:
+#     def letterCombinations(self, digits: str) -> List[str]:
+#         if not digits:
+#             return []
+
+#         d = {
+#         2: ['a', 'b', 'c'],
+#         3: ['d', 'e', 'f'],
+#         4: ['g', 'h', 'i'],
+#         5: ['j', 'k', 'l'],
+#         6: ['m', 'n', 'o'],
+#         7: ['p', 'q', 'r', 's'],
+#         8: ['t', 'u', 'v'],
+#         9: ['w', 'x', 'y', 'z']
+#         }
+        
+#         def backtrack(idx,path):
+#             if idx==len(digits):
+#                 result.append("".join(path))
+#                 return 
+#             curr_dig=int(digits[idx])
+#             for letter in d[curr_dig]:
+#                 path.append(letter)
+#                 backtrack(idx+1,path)
+#                 path.pop()
+        
+#         result=[]
+#         backtrack(0,[])
+
+#         return result
+
+                # OPTIMIZED
+                # O(3^m * 4^n)
+                # O(k (3^m * 4^n)) : k=m+n
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+
+        # Mapping of digits to letters
+        d = {
+            '2': "abc",
+            '3': "def",
+            '4': "ghi",
+            '5': "jkl",
+            '6': "mno",
+            '7': "pqrs",
+            '8': "tuv",
+            '9': "wxyz"
+        }
+
+        def backtrack(idx, path):
+            if idx == len(digits):
+                result.append(path)
+                return
+            for letter in d[digits[idx]]:
+                backtrack(idx + 1, path + letter)
+        
+        result = []
+        backtrack(0, "")
+        return result
+
+"""
+ where
+n is the number of digits mapping to 3 letters (e.g., 2, 3, 4, etc.) and 
+m is the number of digits mapping to 4 letters (e.g., 7, 9). This accounts for generating all possible combinations.
+"""
