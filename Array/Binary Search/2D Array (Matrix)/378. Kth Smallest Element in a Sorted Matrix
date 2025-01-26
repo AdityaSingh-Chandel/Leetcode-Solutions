@@ -1,0 +1,26 @@
+                    # 26-01-25
+            # O(n * log(max-min))
+            # O(1)
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        def lessOrEqual(matrix,tar):
+            n=len(matrix)
+            row,col=n-1,0
+            count=0
+            while row>=0 and col<n:
+                if matrix[row][col] <=tar:
+                    count+=row+1
+                    col+=1
+                else:
+                    row-=1
+            return count
+        n=len(matrix)
+        l,h = matrix[0][0],matrix[n-1][n-1]
+        while l<h:
+            m = (l+h)//2
+            c= lessOrEqual(matrix,m)
+            if c < k:
+                l=m+1
+            else:
+                h=m
+        return l
