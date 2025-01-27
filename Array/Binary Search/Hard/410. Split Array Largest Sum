@@ -1,0 +1,24 @@
+                         # 27-01-25
+              # O( log (sum - max))
+              # O(1)
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        l,h=max(nums),sum(nums)
+        minima = float('inf')
+        while l<=h:
+            mid=(l+h)//2
+            n_sub=1
+            sum_temp=0
+            for num in nums:
+                sum_temp+=num
+                if sum_temp > mid:
+                    n_sub+=1
+                    sum_temp=num
+            # minima = min(minima, larg)  # No use, mid hi min largest sum h
+            if n_sub>k: 
+                l = mid+1
+            else:
+                h=mid-1
+        return l
+            
+                
