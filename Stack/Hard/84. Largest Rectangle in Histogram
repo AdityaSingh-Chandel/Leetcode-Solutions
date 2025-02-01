@@ -1,0 +1,21 @@
+              # 01-02-25
+          # 0(n)
+          # O(n)
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        st=[]
+        res=0
+        n=len(heights)
+        for i in range(n):
+            while st and heights[st[-1]] >= heights[i]:
+                tp=st[-1]
+                st.pop()
+                width=(i-st[-1]-1) if st else i
+                res=max(res,width*heights[tp])
+            st.append(i)
+        while st:
+            tp=st[-1]
+            st.pop()
+            width=(n - st[-1]-1) if st else n
+            res=max(res,width * heights[tp])
+        return res
