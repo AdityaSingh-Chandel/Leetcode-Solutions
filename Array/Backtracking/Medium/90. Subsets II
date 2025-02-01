@@ -1,0 +1,18 @@
+                # 01-02-25
+            # O(n * 2^n)
+            # O(n * 2^n)
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res=set()
+        nums.sort()      # imp - otherwise duplicates bhi aa jaa rhe the
+        def backtrack(idx,path):
+            res.add(tuple(path[:]))  # tuple- as it's immutable and can be contained by a set but not list ( will give unhashable:List)
+            for i in range(idx,len(nums)):
+                path.append(nums[i])
+                backtrack(i+1,path)
+                path.pop()
+        backtrack(0,[])
+        res=list(map(list,res))
+        return res
+
+        
