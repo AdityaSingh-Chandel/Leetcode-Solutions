@@ -1,0 +1,23 @@
+                   # 01-02-25
+            # O(n)
+            # O(n)
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        if not num or k==len(num):
+            return "0"
+        st=[]
+        for x in num:
+            while st and int(st[-1]) > int(x) and k>0:
+                st.pop()
+                k-=1
+            st.append(x) 
+        # Remove remaining k digits (if k > 0)
+        while k > 0 and st:
+            st.pop()
+            k -= 1
+        res=""
+        while st:
+            res=st.pop()+res
+        res=res.lstrip("0")
+        
+        return res if res!="" else "0"
