@@ -1,0 +1,31 @@
+                           # 01-02-25
+                    # O(m*n)
+                    # O(n) 
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        if not matrix:
+            return 0
+        rows,cols=len(matrix),len(matrix[0])
+        heights=[0]*cols
+        max_area=0
+        def maxHistArea(heights):
+            st=[]
+            max_area=0
+            heights.append(0)   # Sentinel value 
+            for i,h in enumerate(heights):
+                while st and heights[st[-1]] > h:
+                    # tp=st[-1]
+                    # st.pop()
+                    height=heights[st.pop()]
+                    width = (i-st[-1]-1) if st else i
+                    max_area=max(max_area,width*height)
+                st.append(i)
+            heights.pop()      # "Removing the sentinel value", 0 hta Diya
+            return max_area
+        for row in matrix:
+            for col in range(cols):
+                heights[col] = heights[col]+1 if row[col]=="1" else 0
+            max_area=max(max_area, maxHistArea(heights))
+        return max_area
+
+
