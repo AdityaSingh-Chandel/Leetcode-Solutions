@@ -1,0 +1,14 @@
+                # 02-02-25
+           # O(N * KlogK) ; N=No. of char ; K=max(len(char))
+           # O(N * K) ....
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        d={}
+        for char in strs:
+            key ="".join(sorted(char))
+            if key in d:
+                d[key].append(char)
+            else:
+                d[key]=[char]
+        out=[val for key,val in d.items()]
+        return out
