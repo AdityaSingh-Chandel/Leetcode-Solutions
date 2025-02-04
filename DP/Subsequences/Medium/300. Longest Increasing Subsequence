@@ -1,0 +1,39 @@
+                  # 04-02-25
+#         # DP -- Not efficient in this (use Binary Search)
+#             # O(n^2)        # 1799 ms
+#             # O(n)
+# class Solution:
+#     def lengthOfLIS(self, nums: List[int]) -> int:
+#         n=len(nums)
+#         lis=[1]*n
+#         for i in range(1,n):
+#             for j in range(0,i):
+#                 if nums[i]>nums[j]:
+#                     lis[i]=max(lis[i],lis[j]+1)
+#         return max(lis)
+
+# Binary Search
+        # O(n * logn)                # 7 ms
+        # O(n)  # len(max(LI Subsequence))
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        # O(logn)
+        def ceilIdx(tail,x):
+            l,h=0,len(tail)-1
+            while l<h:
+                m=l + (h-l)//2
+                if tail[m]>=x:
+                    h=m
+                else:
+                    l=m+1
+            return h
+        # O(n)
+        n=len(nums)
+        tail=[nums[0]]
+        for i in range(1,n):
+            if nums[i]>tail[-1]:
+                tail.append(nums[i])
+            else:
+                c=ceilIdx(tail,nums[i])
+                tail[c]=nums[i]
+        return len(tail)             # len(tail) .....
