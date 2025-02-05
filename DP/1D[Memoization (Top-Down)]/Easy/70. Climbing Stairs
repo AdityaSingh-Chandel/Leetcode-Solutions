@@ -1,0 +1,30 @@
+           # 05-02-25
+#     # DP
+#          # O(n)
+#          # O(n)
+# class Solution:
+#     def climbStairs(self, n: int) -> int:
+#         if n<=2:
+#             return n    # Base case important
+#         memo=[0]*(n+1)
+#         memo[1],memo[2]=1,2
+#         for i in range(3,n+1):
+#             memo[i]=memo[i-1]+memo[i-2]
+#         return memo[n]
+
+# Fibo
+         # O(n)
+         # O(1)
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n<=2:
+            return n
+        prev1=2
+        prev2=1
+        for i in range(3,n+1):
+            curr=prev1+prev2
+            prev1,prev2=curr,prev1
+        return prev1
+        
+
+
