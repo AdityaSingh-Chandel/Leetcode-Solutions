@@ -1,0 +1,32 @@
+                 # 05-02-25
+# class Solution:
+#     def areAlmostEqual(self, s1: str, s2: str) -> bool:
+#         misses=[(i,s1[i],s2[i]) for i in range(len(s1)) if s1[i]!=s2[i]]
+#         if not misses:
+#             return True
+#         print(misses)
+#         return len(misses)==2 and misses[0][1]==misses[1][2] and misses[0][2]==misses[1][1]
+
+   # Below- More Efficient
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        first = second = -1  # Track mismatch indices
+        count = 0  # Count mismatches
+        
+        for i in range(len(s1)):
+            if s1[i] != s2[i]:  
+                count += 1
+                if count == 1:
+                    first = i  # Store first mismatch index
+                elif count == 2:
+                    second = i  # Store second mismatch index
+                else:
+                    return False  # More than 2 mismatches → return False
+        
+        # If no mismatch, return True
+        if count == 0:
+            return True
+        
+        # There must be exactly 2 mismatches, and swapping them should make the strings equal
+        return count == 2 and s1[first] == s2[second] and s1[second] == s2[first]
+
