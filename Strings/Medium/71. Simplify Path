@@ -1,0 +1,54 @@
+               # 07-02-25
+            # O(n)
+            # O(n)
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        st=[]
+        parts=path.split("/")
+        print(parts)
+        for part in parts:
+            if part == "..":
+                if st:
+                    st.pop()
+            elif part and part!=".":
+                st.append(part)
+        print(st)
+        return "/" + "/".join(st)
+
+
+        # st=["/"]
+        # n=len(path)
+        # i,j=1,1
+        # while j<len(path):
+        #     if path[j]=="/":
+        #         while j<n and path[j]=="/":
+        #             if st and st[-1]!="/":
+        #                 st.append("/")
+        #             j+=1
+        #         i=j
+        #     if j<n and path[j]==".":
+        #         while j<n and path[j]==".":
+        #             j+=1
+        #         if j-i > 2:
+        #             st.append("."*(j-i))
+        #         if j-i==2 and len(st)>2:
+        #             st.pop()
+        #             st.pop()
+        #         i=j
+        #     else:
+        #         while j<n and path[j].isalpha():
+        #             j+=1
+        #         st.append(path[i:j+1])
+        #         i=j
+        # # now Output
+        # while len(st)>1 and st[-1]=="/":
+        #     st.pop()
+
+        # out=""
+        # while st:
+        #     out=st.pop() + out
+        # return out
+        
+            
+            
+        
