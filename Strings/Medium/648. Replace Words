@@ -1,0 +1,17 @@
+              # 08-02-25
+      # O(M log M + N * M * K)
+        # M is the size of the dictionary
+        # N is the number of words in the sentence
+        # K is the average length of words
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        sentence=sentence.split()
+        # print(sentence)
+        diction=sorted(dictionary,key=len)
+        for i in range(len(sentence)):
+            for char in diction:
+                if sentence[i].startswith(char):
+                    sentence[i]=char
+                    break
+        print(sentence)
+        return ' '.join(sentence)
