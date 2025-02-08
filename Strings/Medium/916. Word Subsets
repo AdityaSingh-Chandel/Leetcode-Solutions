@@ -1,0 +1,90 @@
+                         # 08-02-25
+             # comlexity same as below
+from collections import Counter
+from typing import List
+
+class Solution:
+    def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+        # Step 1: Compute the maximum frequency required for each character in words2
+        max_freq = Counter()
+        for word in words2:
+            word_freq = Counter(word)
+            for char in word_freq:
+                max_freq[char] = max(max_freq[char], word_freq[char])
+
+        # Step 2: Check each word in words1 if it satisfies max_freq constraints
+        result = []
+        for word in words1:
+            word_freq = Counter(word)
+            if all(word_freq[char] >= max_freq[char] for char in max_freq):
+                result.append(word)
+
+        return result
+
+             # Time : O( n*(avg_n) + m*(avg_m)) ; avg-> avg len of words in the list
+# from collections import defaultdict
+# from typing import List
+
+# class Solution:
+#     def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+#         # Step 1: Create a dictionary to store the max frequency of each character across words2
+#         max_freq = defaultdict(int)
+        
+#         for word in words2:
+#             temp_freq = defaultdict(int)
+#             for char in word:
+#                 temp_freq[char] += 1
+#             # Update max frequency of each character across words2
+#             for char in temp_freq:
+#                 max_freq[char] = max(max_freq[char], temp_freq[char])
+        
+#         # Step 2: Check each word in words1
+#         result = []
+#         for word in words1:
+#             word_freq = defaultdict(int)
+#             for char in word:
+#                 word_freq[char] += 1
+            
+#             # Check if word satisfies all max_freq conditions
+#             flag = True
+#             for char in max_freq:
+#                 if word_freq[char] < max_freq[char]:
+#                     flag = False
+#                     break
+            
+#             if flag:
+#                 result.append(word)
+        
+#         return result
+
+                 # Mera - didn't work (8/56)
+          # Problem : words2 =["lo","eo"] ismw "o" ka count 1 hi lena tha mera 2 le le rha h
+# class Solution:
+#     def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+
+        # words2=''.join(words2)
+        # out=[]
+        # d2={}
+        # for x in words2:
+        #     if x not in d2:
+        #         d2[x]=1
+        #     else:
+        #         d2[x]+=1
+        # d1={}
+        # for s in words1:
+        #     d1={}
+        #     for x in s:
+        #         if x not in d1:
+        #             d1[x]=1
+        #         else:
+        #             d1[x]+=1
+        #     flag=True
+        #     for k in d2:
+        #         if k not in d1 or d1[k]<d2[k]:
+        #             flag=False
+        #             break
+        #     if flag:
+        #         out.append(s)
+        # return out
+                
+            
