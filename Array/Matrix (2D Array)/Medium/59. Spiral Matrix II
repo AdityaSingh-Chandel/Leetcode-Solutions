@@ -1,0 +1,31 @@
+                # 09-02-25
+# Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
+           # O(n^2)
+           # O(n^2)
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        mat=[[0 for i in range(n)] for j in range(n)]
+        print(mat)
+        v=1
+        l,r=0,n-1
+        t,b=0,n-1
+        while v<=(n**2) and t<=b and l<=r:
+            for i in range(l,r+1):
+                mat[t][i]=v
+                v+=1
+            t+=1
+            for i in range(t,b+1):
+                mat[i][r]=v
+                v+=1
+            r-=1
+            if b>t:
+                for i in range(r,l-1,-1):
+                    mat[b][i]=v
+                    v+=1
+                b-=1
+            if l<r:
+                for i in range(b,t-1,-1):
+                    mat[i][l]=v
+                    v+=1
+                l+=1
+        return mat
